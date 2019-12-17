@@ -36,10 +36,8 @@ export const Screen = ({ id, params }) => {
   }
 };
 
-const mapStateToProps = (state) => ({
-  ...state.routing
+const mapStateToProps = state => ({
+  ...state.routing,
 });
 
-export default connect(
-  mapStateToProps
-)(Screen);
+export default connect(mapStateToProps)(Screen);

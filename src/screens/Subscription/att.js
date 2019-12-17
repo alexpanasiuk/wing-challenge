@@ -1,25 +1,42 @@
-import React from 'react';
-import SubscriptionSwitcher from 'subscriptions/SubscriptionSwitcher';
-import Box from 'common/Box';
-import Link from 'common/Link';
-import * as routes from 'app/routes';
-import add_green_circle from 'common/img/add_green_circle.svg';
-import styles from './Subscription.module.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export const SubscriptionScreen = ({ subId }) => {
-  return (
-    <div className="Subscription">
-      <SubscriptionSwitcher attSubId={subId} attRoute={routes.attSubscription} sprintRoute={routes.sprintSubscription} />
-      <div className={styles.linkList}>
-        <Link className={styles.subscriptionLink} to={routes.attInsurance(subId)}>
-          <Box>
-            <img src={add_green_circle} />
-            Insurance
-          </Box>
-        </Link>
-      </div>
-    </div>
-  )
+import { fetchFiltered as fetchFilteredInsuranceContracts } from 'insurance/insuranceContracts/actions';
+
+import { getAttSubscription, getFilteredInsuranceContracts } from 'reducers';
+import Subscription from './attComponent';
+
+class SubscriptionComponent extends Component {
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    const { fetchFilteredInsuranceContracts, subId } = this.props;
+    fetchFilteredInsuranceContracts({ att_subscription: subId });
+  }
+
+  render() {
+    const { contracts, subscription } = this.props;
+    const hasActiveContract = contracts.some(contract => contract.id && contract.att_subscription);
+    return (
+      <Subscription
+        {...this.props}
+        hasActiveContract={hasActiveContract}
+        subStatus={subscription && subscription.att_status}
+        sku={subscription && subscription.device_specs}
+      />
+    );
+  }
 }
 
-export default SubscriptionScreen;
+const mapStateToProps = (state, { subId }) => ({
+  subscription: getAttSubscription(state, subId),
+  contracts: getFilteredInsuranceContracts(state, { subscription: subId }),
+});
+
+const mapDispatchToProps = {
+  fetchFilteredInsuranceContracts,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionComponent);
