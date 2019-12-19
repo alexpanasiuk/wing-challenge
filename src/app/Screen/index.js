@@ -22,7 +22,7 @@ export const Screen = ({ id, params }) => {
     case 'SPRINT_INSURANCE_CONFIRM':
       return <SprintInsuranceConfirmScreen subId={params.subId} sku={params.sku} insPlanId={params.insPlanId} />;
     case 'SPRINT_INSURANCE_PLAN':
-      return <SprintInsurancePlanScreen subId={params.subId} sku={params.sku} />;
+      return <SprintInsurancePlanScreen subId={params.subId} sku={params.sku} isSprint={true} />;
     case 'SPRINT_INSURANCE':
       return <SprintInsuranceScreen subId={params.subId} />;
     case 'ATT_INSURANCE_CONFIRM':

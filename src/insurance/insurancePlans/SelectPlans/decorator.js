@@ -15,7 +15,6 @@ const insurancePlansDecorator = DecoratedComponent => {
     };
 
     render() {
-      console.log(this.props.plans);
       const { children, fetchAllPlans, ...props } = this.props;
       return React.createElement(DecoratedComponent, props, children);
     }

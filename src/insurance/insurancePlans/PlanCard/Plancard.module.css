@@ -7,7 +7,7 @@
 .CardTop {
   position: relative;
   background: #fff;
-  padding: 4rem 2rem 1.5rem;
+  padding: 4rem 0rem 1.5rem;
   text-align: center;
 }
 
@@ -71,10 +71,18 @@
 
 .ListItem {
   list-style: none;
+  position: relative;
+  padding-left: 2rem;
+}
+
+.Tick {
+  position: absolute;
+  left: 0rem;
 }
 
 .RepairWrapper {
   margin-top: auto;
+  font-size: 1.3rem;
 }
 
 .MainCard {
