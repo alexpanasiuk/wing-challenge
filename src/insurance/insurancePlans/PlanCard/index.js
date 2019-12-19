@@ -1,11 +1,16 @@
 import React from 'react';
 import cn from 'classnames';
-
-import styles from './Plancard.module.css';
+import * as routes from 'app/routes';
 import Button from 'common/Button';
 
-const PlanCard = ({ plan, isScale }) => {
-  const { price, repair_deductible, replacement_deductible, sku, name } = plan;
+import styles from './Plancard.module.css';
+
+const PlanCard = ({ plan, isScale, goToConfirmPage }) => {
+  if (!plan) {
+    return null;
+  }
+
+  const { id, price, repair_deductible, replacement_deductible, sku, name } = plan;
   return (
     <div className={cn(styles.Card, isScale && styles.MainCard)}>
       <div className={styles.CardTop}>
@@ -26,7 +31,9 @@ const PlanCard = ({ plan, isScale }) => {
           <a href="#">Terms, fees, and more info</a>
         </div>
         <div className={styles.ButtonWrapper}>
-          <Button>Select</Button>
+          <Button isLink={true} to={goToConfirmPage(id)}>
+            Select
+          </Button>
         </div>
       </div>
       <div className={styles.CardBottom}>

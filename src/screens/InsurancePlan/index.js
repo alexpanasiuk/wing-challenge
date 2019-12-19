@@ -5,9 +5,13 @@ import insurancePlansDecorator from 'insurance/insurancePlans/SelectPlans/decora
 import PlanCard from '../../insurance/insurancePlans/PlanCard';
 import styles from './InsurancePlan.module.css';
 
-const SprintInsurancePlan = props => {
-  const { subId, plans, isSprint } = props;
+const InsurancePlans = props => {
+  const { subId, sku, plans, isSprint } = props;
   const sortedPlans = Object.values(plans).sort(priceComparator);
+
+  const goToConfirmPage = planId => {
+    return isSprint ? routes.sprintInsuranceConfirm(subId, sku, planId) : routes.attInsuranceConfirm(subId, sku, planId);
+  };
 
   if (!sortedPlans.length) {
     return null;
@@ -20,9 +24,9 @@ const SprintInsurancePlan = props => {
       </div>
       <h1>Your Device Protection Details</h1>
       <div className={styles.CardsWrapper}>
-        <PlanCard plan={sortedPlans[0]} />
-        <PlanCard plan={sortedPlans[2]} isScale={true} />
-        <PlanCard plan={sortedPlans[1]} />
+        <PlanCard plan={sortedPlans[0]} goToConfirmPage={goToConfirmPage} />
+        <PlanCard plan={sortedPlans[2]} goToConfirmPage={goToConfirmPage} isScale={true} />
+        <PlanCard plan={sortedPlans[1]} goToConfirmPage={goToConfirmPage} />
       </div>
     </div>
   );
@@ -42,4 +46,4 @@ const priceComparator = (a, b) => {
   return asc(Number(a.price), Number(b.price));
 };
 
-export default insurancePlansDecorator(SprintInsurancePlan);
+export default insurancePlansDecorator(InsurancePlans);
