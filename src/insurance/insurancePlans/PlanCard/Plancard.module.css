@@ -1,0 +1,166 @@
+.Card {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 33.33%;
+}
+
+.CardTop {
+  position: relative;
+  background: #fff;
+  padding: 4rem 2rem 1.5rem;
+  text-align: center;
+}
+
+.Title {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.PriceWrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.PriceTitle {
+  color: #777;
+  font-size: 1.45rem;
+}
+
+.Price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #206bef;
+}
+
+.ButtonWrapper {
+  max-width: 14rem;
+  margin: 0 auto;
+}
+
+.LinkWrapper {
+  margin-bottom: 0.1rem;
+}
+
+.CardBottom {
+  position: relative;
+  background: #c7cacf;
+  padding: 2.5rem 2rem 2.5rem;
+  color: #475681;
+  text-align: left;
+  font-size: 1.45rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+
+.Line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: #fff;
+  bottom: 9rem;
+  left: 0;
+}
+
+.List {
+  margin-top: 0.5rem;
+  margin-bottom: 4.5rem;
+  padding-left: 0;
+}
+
+.ListItem {
+  list-style: none;
+}
+
+.RepairWrapper {
+  margin-top: auto;
+}
+
+.MainCard {
+  transform: scaleY(1.07) translateY(-2%);
+  box-shadow: 0px 0px 21px #c3bfbf;
+  z-index: 1;
+}
+
+.MainCard > div > * {
+  transform: scaleY(0.935);
+}
+
+.MainCard .Title {
+  margin-top: 2.25rem;
+}
+
+.MainCard .PriceWrapper {
+  margin-top: 1.8rem;
+}
+
+.MainCard > div > .StarBlock {
+  transform: scale(1);
+}
+
+.MainCard .Line {
+  bottom: 8.9rem;
+}
+
+.StarBlock {
+  position: absolute;
+  top: 0;
+  right: 2.5rem;
+  height: 5.5rem;
+  width: 4rem;
+  background: #206bef;
+}
+
+.StarBlockTriangle {
+  width: 0;
+  height: 0;
+  border-left: 2rem solid transparent;
+  border-right: 2rem solid transparent;
+  border-bottom: 1.5rem solid #fff;
+  position: absolute;
+  bottom: -1px;
+}
+
+.StarWrapper {
+  position: absolute;
+  left: -50%;
+  top: 50%;
+  transform: translate(0.15rem, -50%);
+}
+
+.Star {
+  height: 0;
+  width: 0;
+  position: relative;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid #ffd701;
+  border-left: 50px solid transparent;
+  transform: rotate(35deg) scale(0.25) translateX(-50%);
+}
+
+.Star:before,
+.Star:after {
+  content: '';
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+.Star:before {
+  top: -26px;
+  left: -32px;
+  border-bottom: 40px solid #ffd701;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  transform: rotate(-35deg);
+}
+
+.Star:after {
+  top: 2px;
+  left: -53px;
+  border-right: 50px solid transparent;
+  border-bottom: 35px solid #ffd701;
+  border-left: 50px solid transparent;
+  transform: rotate(-70deg);
+}

@@ -27,16 +27,16 @@ export default combineReducers({
   insuredDevices,
 });
 
-export const getUser = (state) => fromAuth.getUser(state.auth);
+export const getUser = state => fromAuth.getUser(state.auth);
 
-export const getSprintSubscription = (state, id) => fromSprintSubs.getSprintSubscription(state.sprintSubscriptions, id)
-export const getAllSprintSubscriptions = (state) => fromSprintSubs.getAll(state.sprintSubscriptions);
+export const getSprintSubscription = (state, id) => fromSprintSubs.getSprintSubscription(state.sprintSubscriptions, id);
+export const getAllSprintSubscriptions = state => fromSprintSubs.getAll(state.sprintSubscriptions);
 export const getCurrentSprintPlan = (state, id) => fromSprintSubs.getCurrentPlan(state.sprintSubscriptions, id);
 export const getUpcomingSprintPlan = (state, id) => fromSprintSubs.getUpcomingPlan(state.sprintSubscriptions, id);
 export const getSprintUpgradePurchase = (state, id) => fromSprintSubs.getUpgradePurchase(state.sprintSubscriptions, id);
 
-export const getAttSubscription = (state, id) => fromAttSubs.getAttSubscription(state.attSubscriptions, id)
-export const getAllAttSubscriptions = (state) => fromAttSubs.getAll(state.attSubscriptions);
+export const getAttSubscription = (state, id) => fromAttSubs.getAttSubscription(state.attSubscriptions, id);
+export const getAllAttSubscriptions = state => fromAttSubs.getAll(state.attSubscriptions);
 export const getCurrentAttPlan = (state, id) => fromAttSubs.getCurrentPlan(state.attSubscriptions, id);
 export const getUpcomingAttPlan = (state, id) => fromAttSubs.getUpcomingPlan(state.attSubscriptions, id);
 export const getAttUpgradePurchase = (state, id) => fromAttSubs.getUpgradePurchase(state.attSubscriptions, id);
@@ -45,8 +45,9 @@ export const getInfo = (state, key) => fromNotifications.getInfo(state.notificat
 export const getError = (state, key) => fromNotifications.getError(state.notifications, key);
 
 export const getDevice = (state, id) => fromDevices.get(state.devices, id);
-export const getFilteredDevices = (state) => fromDevices.getFiltered(state.devices);
+export const getFilteredDevices = state => fromDevices.getFiltered(state.devices);
 
+export const getAllInsurancePlan = state => fromInsurancePlans.getAll(state.insurancePlans);
 export const getInsurancePlan = (state, id) => fromInsurancePlans.get(state.insurancePlans, id);
 export const getInsurancePlansForValue = (state, value) => fromInsurancePlans.getValue(state.insurancePlans, value);
 
