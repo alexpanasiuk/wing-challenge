@@ -4,6 +4,7 @@ import * as types from './types';
 import * as api from './api';
 import * as actions from './actions';
 import * as actionsInsuredDevice from 'insurance/insuredDevices/actions';
+import * as actionsNotification from 'notifications/actions';
 import { setInsuranceContract as setSprintContract } from 'subscriptions/sprint/actions';
 import { setInsuranceContract as setAttContract } from 'subscriptions/att/actions';
 
@@ -51,6 +52,7 @@ export function* create(action) {
   contract.status = 'active';
   // yield put(subscription ? setSprintContract(contract) : setAttContract(contract));
   yield put(subscription ? routes.sprintSubscription(subscription) : routes.attSubscription(att_subscription));
+  yield put(actionsNotification.info('general', 'Contract successfully created'));
 }
 
 export function* watchFind() {
