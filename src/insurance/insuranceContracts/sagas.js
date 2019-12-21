@@ -28,11 +28,11 @@ export const updateContract = function*(action) {
       resourceType: 'insuranceContracts',
       endpoint: api.activate,
       endpointArgs: payload => [contract.id],
-      transformResponse: () => {
+      transformResponse: resp => {
         return [
           {
             ...contract,
-            status: 'active',
+            status: resp.data === 'success' ? 'active' : 'pending',
           },
         ];
       },
@@ -62,7 +62,6 @@ export function* create(action) {
     yield put(actions.activateContract(contract)),
   ]);
 
-  // yield put(subscription ? setSprintContract(contract) : setAttContract(contract));
   yield put(subscription ? routes.sprintSubscription(subscription) : routes.attSubscription(att_subscription));
   yield put(actionsNotification.info('general', 'Contract successfully created'));
 }

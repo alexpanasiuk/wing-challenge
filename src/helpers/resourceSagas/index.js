@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
 import * as actions from './actions';
-console.log(actions);
 /*
 const getAll = getAllGen({
   resourceType: 'purchases',
