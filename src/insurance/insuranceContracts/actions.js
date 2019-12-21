@@ -16,7 +16,7 @@ export const createContract = params => ({
   payload: { params },
 });
 
-export const activateContract = id => ({
+export const activateContract = contract => ({
   type: types.ACTIVATE,
-  payload: { id },
+  payload: { contract },
 });

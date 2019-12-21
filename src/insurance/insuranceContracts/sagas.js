@@ -21,17 +21,30 @@ export const fetchFiltered = getAllGenerator({
   endpointArgs: payload => [payload.params],
 });
 
-export const updateContract = updateGenerator({
-  resourceType: 'insuranceContracts',
-  endpoint: api.activate,
-  tranformResp: () => ({}),
-});
+export const updateContract = function*(action) {
+  const { contract } = action.payload;
+  yield call(
+    updateGenerator({
+      resourceType: 'insuranceContracts',
+      endpoint: api.activate,
+      endpointArgs: payload => [contract.id],
+      transformResponse: () => {
+        return [
+          {
+            ...contract,
+            status: 'active',
+          },
+        ];
+      },
+    }),
+    action,
+  );
+};
 
 export const createContract = createGenerator({
   resourceType: 'insuranceContracts',
   endpoint: api.create,
   endpointArgs: payload => [payload.params],
-  tranformResp: () => ({}),
 });
 
 export function* create(action) {
@@ -46,10 +59,9 @@ export function* create(action) {
         plan_type: insPlanId,
       }),
     ),
-    yield put(actions.activateContract(contract.id)),
+    yield put(actions.activateContract(contract)),
   ]);
 
-  contract.status = 'active';
   // yield put(subscription ? setSprintContract(contract) : setAttContract(contract));
   yield put(subscription ? routes.sprintSubscription(subscription) : routes.attSubscription(att_subscription));
   yield put(actionsNotification.info('general', 'Contract successfully created'));
