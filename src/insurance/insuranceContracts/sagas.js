@@ -50,13 +50,13 @@ export const createContract = createGenerator({
 export function* create(action) {
   const contract = yield call(createContract, action);
 
-  const { sku, insPlanId, subscription, att_subscription } = action.payload.params;
+  const { sku, planType, subscription, att_subscription } = action.payload.params;
   yield all([
     yield put(
       actionsInsuredDevice.create({
         contract: contract.id,
         device_specs: sku,
-        plan_type: insPlanId,
+        plan_type: planType,
       }),
     ),
     yield put(actions.activateContract(contract)),

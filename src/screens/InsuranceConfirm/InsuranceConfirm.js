@@ -17,8 +17,8 @@ class InsuranceConfirm extends Component {
   }
 
   handleClick = () => {
-    const { subId, sku, createContract, isSprint, insPlanId } = this.props;
-    createContract({ subscription: isSprint && subId, att_subscription: !isSprint && subId, sku, insPlanId });
+    const { subId, sku, createContract, isSprint, insurancePlan } = this.props;
+    createContract({ subscription: isSprint && subId, att_subscription: !isSprint && subId, sku, planType: insurancePlan.sku });
   };
 
   render() {

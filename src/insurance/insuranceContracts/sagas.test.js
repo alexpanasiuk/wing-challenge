@@ -28,7 +28,7 @@ const contract = {
 describe('createContract generator', () => {
   const params = {
     sku: 'GN5XB32N',
-    insPlanId: 2,
+    planType: 'WDP3P',
     subscription: subId,
     att_subscription: null,
   };
@@ -61,7 +61,7 @@ describe('createContract generator', () => {
 describe('createContract', () => {
   const params = {
     sku: 'GN5XB32N',
-    insPlanId: 2,
+    planType: 'WDP3P',
     subscription: subId,
     att_subscription: null,
   };
@@ -78,7 +78,7 @@ describe('createContract', () => {
         actionsInsuredDevice.create({
           contract: contract.id,
           device_specs: params.sku,
-          plan_type: params.insPlanId,
+          plan_type: params.planType,
         }),
       ),
     );
