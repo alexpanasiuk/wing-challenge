@@ -5,9 +5,9 @@ import insurancePlansDecorator from 'insurance/insurancePlans/SelectPlans/decora
 import PlanCard from '../../insurance/insurancePlans/PlanCard';
 import styles from './InsurancePlan.module.css';
 
-const InsurancePlans = props => {
+export const InsurancePlans = props => {
   const { subId, sku, plans, isSprint } = props;
-  const sortedPlans = Object.values(plans).sort(priceComparator);
+  const sortedPlans = plans ? Object.values(plans).sort(priceComparator) : [];
 
   const goToConfirmPage = planId => {
     return isSprint ? routes.sprintInsuranceConfirm(subId, sku, planId) : routes.attInsuranceConfirm(subId, sku, planId);
@@ -32,7 +32,7 @@ const InsurancePlans = props => {
   );
 };
 
-const asc = (a, b) => {
+export const asc = (a, b) => {
   if (b > a) {
     return -1;
   }
@@ -42,7 +42,7 @@ const asc = (a, b) => {
   return 0;
 };
 
-const priceComparator = (a, b) => {
+export const priceComparator = (a, b) => {
   return asc(Number(a.price), Number(b.price));
 };
 
