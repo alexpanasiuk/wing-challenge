@@ -132,19 +132,19 @@
 
 .StarWrapper {
   position: absolute;
-  left: -50%;
+  left: 50%;
   top: 50%;
-  transform: translate(0.15rem, -50%);
+  transform: translate(-0.1rem, -50%);
 }
 
 .Star {
   height: 0;
   width: 0;
   position: relative;
-  border-right: 50px solid transparent;
-  border-bottom: 35px solid #ffd701;
-  border-left: 50px solid transparent;
-  transform: rotate(35deg) scale(0.25) translateX(-50%);
+  border-right: 13px solid transparent;
+  border-bottom: 9px solid #ffd701;
+  border-left: 13px solid transparent;
+  transform: rotate(35deg) translateX(-50%);
 }
 
 .Star:before,
@@ -156,19 +156,37 @@
 }
 
 .Star:before {
-  top: -26px;
-  left: -32px;
-  border-bottom: 40px solid #ffd701;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
+  top: -7px;
+  left: -9px;
+  border-bottom: 10px solid #ffd701;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
   transform: rotate(-35deg);
 }
 
 .Star:after {
-  top: 2px;
-  left: -53px;
-  border-right: 50px solid transparent;
-  border-bottom: 35px solid #ffd701;
-  border-left: 50px solid transparent;
+  top: 0px;
+  left: -14px;
+  border-right: 13px solid transparent;
+  border-bottom: 9px solid #ffd701;
+  border-left: 13px solid transparent;
   transform: rotate(-70deg);
+}
+@media screen and (max-width: 767px) {
+  .Card {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto 3rem;
+    box-shadow: 0px 0px 15px #c3bfbf;
+  }
+
+  .MainCard {
+    order: -1;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .MainCard > div > * {
+    transform: none;
+  }
 }
