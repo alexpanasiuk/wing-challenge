@@ -1,19 +1,19 @@
 import { actionTypes as resourceActions } from 'redux-resource';
 import * as types from './types';
 
-export const find = (id) => ({
+export const find = id => ({
   type: types.FIND,
-  payload: { id }
+  payload: { id },
 });
 
-export const fetchAll = (userId) => ({
+export const fetchAll = userId => ({
   type: types.FETCH_ALL,
-  payload: { userId }
+  payload: { userId },
 });
 
 export const updatePlan = (id, planId) => ({
   type: types.UPDATE_PLAN,
-  payload: { id, planId }
+  payload: { id, planId },
 });
 
 export const setUpcomingPlan = (id, plan) => ({
@@ -21,10 +21,17 @@ export const setUpcomingPlan = (id, plan) => ({
   meta: {
     attSubscriptions: {
       [id]: {
-        upcomingPlan: plan
-      }
-    }
-  }
+        upcomingPlan: plan,
+      },
+    },
+  },
+});
+
+export const setInsuranceContract = contract => ({
+  type: resourceActions.CREATE_RESOURCES_SUCCEEDED,
+  resourceType: 'attSubscriptions',
+  requestKey: 'create',
+  resources: [contract],
 });
 
 export const setUpgradePurchase = (id, purchase) => ({
@@ -32,8 +39,8 @@ export const setUpgradePurchase = (id, purchase) => ({
   meta: {
     attSubscriptions: {
       [id]: {
-        upgradePurchase: purchase
-      }
-    }
-  }
-})
+        upgradePurchase: purchase,
+      },
+    },
+  },
+});

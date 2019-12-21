@@ -15,16 +15,27 @@ class InsuranceConfirm extends Component {
       insPlanId && findInsurancePlan(insPlanId);
     }
   }
+
+  handleClick = () => {
+    const { subId, sku, createContract, isSprint, insPlanId } = this.props;
+    createContract({ subscription: isSprint && subId, att_subscription: !isSprint && subId, sku, insPlanId });
+  };
+
   render() {
-    const { sku, insurancePlan } = this.props;
+    const { sku, insurancePlan, subId, isSprint } = this.props;
 
     return (
       <div>
+        <div className={styles.Back}>
+          <Back to={isSprint ? routes.sprintInsurancePlan(subId, sku) : routes.attInsurancePlan(subId, sku)} />
+        </div>
         <DeviceInfo deviceId={sku} />
 
         <Box className={styles.makeClaim}>
           <PlanInfo insurancePlan={insurancePlan} />
-          <BottomButton href="#">Confirm</BottomButton>
+          <BottomButton href="#" onClick={this.handleClick}>
+            Confirm
+          </BottomButton>
         </Box>
       </div>
     );

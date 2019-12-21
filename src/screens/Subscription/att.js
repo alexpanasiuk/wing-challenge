@@ -18,6 +18,7 @@ class SubscriptionComponent extends Component {
 
   render() {
     const { contracts, subscription } = this.props;
+
     const hasActiveContract = contracts.some(contract => contract.id && contract.att_subscription);
     return (
       <Subscription
@@ -32,7 +33,7 @@ class SubscriptionComponent extends Component {
 
 const mapStateToProps = (state, { subId }) => ({
   subscription: getAttSubscription(state, subId),
-  contracts: getFilteredInsuranceContracts(state, { subscription: subId }),
+  contracts: getFilteredInsuranceContracts(state, { attSubscription: subId }),
 });
 
 const mapDispatchToProps = {

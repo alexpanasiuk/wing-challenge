@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
 import * as actions from './actions';
-
+console.log(actions);
 /*
 const getAll = getAllGen({
   resourceType: 'purchases',
@@ -9,61 +9,73 @@ const getAll = getAllGen({
 })
 */
 export const getAllGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
-  return function* (action) {
+  return function*(action) {
     const args = endpointArgs(action.payload);
     try {
       yield put(actions.getAllPending(resourceType, actionProps));
       const resp = yield call(endpoint, ...args);
       yield put(actions.getAllSucceeded(resourceType, resp, transformResponse, actionProps));
-    }
-    catch (err) {
+    } catch (err) {
       yield put(actions.getAllFailed(resourceType, err, actionProps));
     }
-  }
+  };
 };
 
 export const findGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
-  return function* (action) {
-    const defaultArgs = (payload) => [ payload.id ];
+  return function*(action) {
+    const defaultArgs = payload => [payload.id];
     endpointArgs = endpointArgs || defaultArgs;
     const args = endpointArgs(action.payload);
     try {
       yield put(actions.findPending(resourceType, actionProps));
       const resp = yield call(endpoint, ...args);
       yield put(actions.findSucceeded(resourceType, resp, transformResponse, actionProps));
-    }
-    catch (err) {
+    } catch (err) {
       yield put(actions.findFailed(resourceType, err, actionProps));
     }
-  }
+  };
 };
 
 export const updateGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
-  return function* (action) {
-    const defaultArgs = (payload) => [ payload.id ];
+  return function*(action) {
+    const defaultArgs = payload => [payload.id];
     endpointArgs = endpointArgs || defaultArgs;
     const args = endpointArgs(action.payload);
     try {
       yield put(actions.updatePending(resourceType, actionProps));
       const resp = yield call(endpoint, ...args);
       yield put(actions.updateSucceeded(resourceType, resp, transformResponse, actionProps));
-    }
-    catch (err) {
+    } catch (err) {
       yield put(actions.updateFailed(resourceType, err, actionProps));
     }
-  }
-}
+  };
+};
+
+export const createGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
+  return function*(action) {
+    const defaultArgs = payload => [payload.id];
+    endpointArgs = endpointArgs || defaultArgs;
+    const args = endpointArgs(action.payload);
+    try {
+      yield put(actions.createPending(resourceType, actionProps));
+      const resp = yield call(endpoint, ...args);
+      yield put(actions.createSucceeded(resourceType, resp, transformResponse, actionProps));
+      return resp.data;
+    } catch (err) {
+      yield put(actions.createFailed(resourceType, err, actionProps));
+    }
+  };
+};
 
 export const getAllPaginatedGenerator = ({ resourceType, endpoint, endpointArgs, transformResponse, actionProps = {} }) => {
-  return function* (action) {
+  return function*(action) {
     const args = endpointArgs(action.payload);
     try {
       yield put(actions.getHistoryPending(resourceType, args));
       const resp = yield call(endpoint, ...args);
       yield put(actions.getHistorySucceeded(resourceType, resp, args, transformResponse));
-    }
-    catch (err) {
+    } catch (err) {
       yield put(actions.getHistoryFailed(resourceType, args));
     }
-  }
+  };
 };

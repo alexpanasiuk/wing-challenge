@@ -18,6 +18,7 @@ class SubscriptionComponent extends Component {
 
   render() {
     const { contracts, subscription } = this.props;
+
     const hasActiveContract = contracts.some(contract => contract.id && contract.subscription);
     return (
       <Subscription

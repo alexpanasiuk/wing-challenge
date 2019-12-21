@@ -2,14 +2,21 @@ import { actionTypes as resourceActions } from 'redux-resource';
 
 const getAllDefaults = {
   requestKey: 'getAll',
-}
+};
 export const getAllPending = (resourceType, actionProps) => ({
   ...getAllDefaults,
   ...actionProps,
   resourceType,
   type: resourceActions.READ_RESOURCES_PENDING,
 });
-export const getAllSucceeded = (resourceType, response, transformResp = (resp) => { return resp.data.results }, actionProps) => ({
+export const getAllSucceeded = (
+  resourceType,
+  response,
+  transformResp = resp => {
+    return resp.data.results;
+  },
+  actionProps,
+) => ({
   ...getAllDefaults,
   ...actionProps,
   resourceType,
@@ -25,14 +32,21 @@ export const getAllFailed = (resourceType, err, actionProps) => ({
 
 const findDefaults = {
   requestKey: 'find',
-}
+};
 export const findPending = (resourceType, actionProps) => ({
   ...findDefaults,
   ...actionProps,
   resourceType,
   type: resourceActions.READ_RESOURCES_PENDING,
 });
-export const findSucceeded = (resourceType, response, transformResp = (resp) => { return [resp.data] }, actionProps) => ({
+export const findSucceeded = (
+  resourceType,
+  response,
+  transformResp = resp => {
+    return [resp.data];
+  },
+  actionProps,
+) => ({
   ...findDefaults,
   ...actionProps,
   resourceType,
@@ -46,16 +60,53 @@ export const findFailed = (resourceType, err, actionProps) => ({
   type: resourceActions.READ_RESOURCES_FAILED,
 });
 
+const createDefaults = {
+  requestKey: 'create',
+};
+export const createPending = (resourceType, actionProps) => ({
+  ...createDefaults,
+  ...actionProps,
+  resourceType,
+  type: resourceActions.CREATE_RESOURCES_PENDING,
+});
+export const createSucceeded = (
+  resourceType,
+  response,
+  transformResp = resp => {
+    return [resp.data];
+  },
+  actionProps,
+) => ({
+  ...createDefaults,
+  ...actionProps,
+  resourceType,
+  type: resourceActions.CREATE_RESOURCES_SUCCEEDED,
+  resources: transformResp(response),
+});
+export const createFailed = (resourceType, err, actionProps) => ({
+  ...createDefaults,
+  ...actionProps,
+  resourceType,
+  type: resourceActions.CREATE_RESOURCES_FAILED,
+});
+
 const updateDefaults = {
   requestKey: 'update',
-}
+};
 export const updatePending = (resourceType, actionProps) => ({
   ...updateDefaults,
   ...actionProps,
   resourceType,
   type: resourceActions.UPDATE_RESOURCES_PENDING,
 });
-export const updateSucceeded = (resourceType, response, transformResp = (resp) => { return [resp.data] }, actionProps) => ({
+export const updateSucceeded = (
+  resourceType,
+  response,
+  transformResp = resp => {
+    return [resp.data];
+  },
+  actionProps,
+) => ({
   ...updateDefaults,
   ...actionProps,
   resourceType,
@@ -69,7 +120,6 @@ export const updateFailed = (resourceType, err, actionProps) => ({
   type: resourceActions.UPDATE_RESOURCES_FAILED,
 });
 
-
 export const getHistoryPending = (resourceType, [_, page]) => ({
   requestKey: `getHistory${page}`,
   list: `userHistory${page}`,
@@ -77,7 +127,7 @@ export const getHistoryPending = (resourceType, [_, page]) => ({
   type: resourceActions.READ_RESOURCES_PENDING,
 });
 
-export const getHistorySucceeded = (resourceType, response, [_, page], transformResp = (resp) => resp.data.results) => {
+export const getHistorySucceeded = (resourceType, response, [_, page], transformResp = resp => resp.data.results) => {
   const { next, previous } = response.data;
   return {
     requestKey: `getHistory${page}`,
@@ -87,8 +137,8 @@ export const getHistorySucceeded = (resourceType, response, [_, page], transform
     resources: transformResp(response),
     requestProperties: {
       next,
-      previous
-    }
+      previous,
+    },
   };
 };
 
